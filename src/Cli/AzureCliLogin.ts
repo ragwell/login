@@ -121,15 +121,20 @@ export class AzureCliLogin {
     }
 
     async callCliLogin(args: string[], methodName: string) {
-        console.log(`Attempting Azure CLI login by using ${methodName}...`);
-        args.unshift("login");
-        if (this.loginConfig.allowNoSubscriptionsLogin) {
-            args.push("--allow-no-subscriptions");
+        try {
+            console.log(`Attempting Azure CLI login by using ${methodName}...`);
+            args.unshift("login");
+            if (this.loginConfig.allowNoSubscriptionsLogin) {
+                args.push("--allow-no-subscriptions");
+            }
+            await this.executeAzCliCommand(args, true, this.loginOptions);
+            await this.setSubscription();
+            this.isSuccess = true;
+            console.log(`Azure CLI login succeed by using ${methodName}.`);
         }
-        await this.executeAzCliCommand(args, true, this.loginOptions);
-        await this.setSubscription();
-        this.isSuccess = true;
-        console.log(`Azure CLI login succeed by using ${methodName}.`);
+        catch (error) {
+            throw new Error(`Azure CLI login failed: ${error} Please check the credentials and auth-type. For more information refer https://github.com/Azure/login#readme`);
+        }
     }
 
     async setSubscription() {
