@@ -61,13 +61,6 @@ export class AzureCliLogin {
                 await this.loginWithSystemAssignedIdentity(args);
             }
         }
-
-        if (!this.isSuccess) {
-            throw new Error("Azure CLI Login failed.");
-        }
-        else {
-            console.log("Azure CLI Login succeeded.");
-        }
     }
 
     async setAzurestackEnvIfNecessary() {

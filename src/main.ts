@@ -38,12 +38,7 @@ async function main() {
         console.log("Login successful.");
     }
     catch (error) {
-        if (!cliLogin.isSuccess) {
-            core.setFailed(`Az CLI Login failed with ${error}. Please check the credentials and make sure az is installed on the runner. For more information refer https://aka.ms/create-secrets-for-GitHub-workflows`);
-        }
-        else {
-            core.setFailed(`Azure PowerShell Login failed with ${error}. Please check the credentials and make sure az is installed on the runner. For more information refer https://aka.ms/create-secrets-for-GitHub-workflows`);
-        }
+        core.setFailed(`Login failed with ${error}. Please check the credentials and make sure az is installed on the runner. For more information refer https://aka.ms/create-secrets-for-GitHub-workflows`);
     }
     finally {
         // Reset AZURE_HTTP_USER_AGENT
