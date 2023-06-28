@@ -33,7 +33,7 @@ inputs:
   auth-type:
     description: 'The type of authentication. Supported values are service-principal, identity. Default value is service-principal' 
     required: false
-    default: 'service-principal'
+    default: 'service_principal'
 branding:
   icon: 'login.svg'
   color: 'blue'
